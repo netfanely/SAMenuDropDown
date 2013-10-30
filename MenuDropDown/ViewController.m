@@ -22,16 +22,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     
-    NSArray *arrname = [[NSArray alloc] initWithObjects:@"Hello 0", @"Hello 1", @"Hello 2", @"Hello 3", @"Hello 4", @"Hello 5", @"Hello 6", @"Hello 7", @"Hello 8", @"Hello 9",nil] ;
+    NSArray *arrname = [[NSArray alloc] initWithObjects:@"SAMenu 0", @"SAMenu 1", @"SAMenu 2", @"SAMenu 3", @"SAMenu 4", @"SAMenu 5", @"SAMenu 6", @"SAMenu 7", @"SAMenu 8", @"SAMenu 9",nil] ;
     
     
-    NSArray *arrTitle = [[NSArray alloc] initWithObjects:@"Title 0", @"Title 1", @"Title 2", @"Title 3", @"Title 4", @"Title 5", @"Title 6", @"Title 7", @"Title 8", @"Title 9",nil] ;
+    NSArray *arrTitle = [[NSArray alloc] initWithObjects:@"SAMenuDescription 0", @"SAMenuDescription 1", @"SAMenuDescription 2", @"SAMenuDescription 3", @"SAMenuDescription 4", @"SAMenuDescription 5", @"SAMenuDescription 6", @"SAMenuDescription 7", @"SAMenuDescription 8", @"SAMenuDescription 9",nil] ;
 
     
-    NSArray *arrImg = [[NSArray alloc] initWithObjects:@"Title 0", @"Title 1", @"Title 2", @"Title 3", @"Title 4", @"Title 5", @"Title 6", @"Title 7", @"Title 8", @"Title 9",nil] ;
+    NSArray *arrImg = [[NSArray alloc] initWithObjects:@"10.png", @"11.png", @"12.png", @"13.png", @"14.png", @"15.png", @"16.png", @"17.png", @"18.png", @"19.png",nil] ;
 
     
-    _menuDrop = [[SAMenuDropDown alloc] initWithWithSource:_btnSender menuHeight:160.0 itemNames:arrname itemImagesName:nil itemSubtitles:arrTitle];
+    _menuDrop = [[SAMenuDropDown alloc] initWithWithSource:_btnSender menuHeight:160.0 itemNames:arrname itemImagesName:arrImg itemSubtitles:arrTitle];
+    _menuDrop.delegate = self;
     
 }
 
@@ -44,7 +45,7 @@
 - (IBAction)btnShowMenu:(UIButton *)sender {
     
     if(!sender.selected) {
-        [_menuDrop showSADropDownMenuWithAnimation:kSAMenuDropAnimationDirectionTop];
+        [_menuDrop showSADropDownMenuWithAnimation:kSAMenuDropAnimationDirectionBottom];
         sender.selected = YES;
     }
     else {
@@ -54,4 +55,24 @@
     
     
 }
+
+
+
+
+
+
+- (void)saDropMenu:(SAMenuDropDown *)menuSender didClickedAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"\n\n##<<%@>>##", menuSender);
+    
+    NSLog(@"\n\n\nClicked \n\n<<Button#%i>>", buttonIndex);
+}
+
+
 @end
+
+
+
+
+
+

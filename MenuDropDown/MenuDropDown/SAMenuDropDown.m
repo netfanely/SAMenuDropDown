@@ -9,14 +9,17 @@
 #import "SAMenuDropDown.h"
 
 
+#define kSAImageFromBundle(imgName)                   [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath]\
+                                                               stringByAppendingPathComponent:imgName]]
 
+#define kSACellHeight                                25.0
 
 
 @interface MenuItemData : NSObject
 
 @property (nonatomic, retain) NSString *itemName;
 @property (nonatomic, retain) NSString *itemNameSubtitle;
-@property (nonatomic, retain) UIImage *itemImage;
+@property (nonatomic, retain) NSString *itemImage;
 @end
 
 
@@ -160,18 +163,18 @@
             }
             
             if(i <= s) {
-                item.itemImage = [subtitleArr objectAtIndex:i];
-            }
-            else {
-                item.itemImage = nil;
-            }
-            
-            
-            if(i <= s) {
-                item.itemNameSubtitle = [imageArr objectAtIndex:i];
+                item.itemNameSubtitle = [subtitleArr objectAtIndex:i];
             }
             else {
                 item.itemNameSubtitle = nil;
+            }
+            
+            
+            if(i <= img) {
+                item.itemImage = [imageArr objectAtIndex:i];
+            }
+            else {
+                item.itemImage = nil;
             }
             
             
@@ -205,17 +208,15 @@
 
 - (void)uiSetUp
 {
-   // _tableMenu = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight)];
+    _tableMenu = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _sourceButtom.frame.size.width, 0)];
     _tableMenu.dataSource = self;
     _tableMenu.delegate = self;
-    _tableMenu.layer.cornerRadius = 5;
-    _tableMenu.backgroundColor = [UIColor colorWithRed:0.239 green:0.239 blue:0.239 alpha:1];
-    _tableMenu.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableMenu.backgroundColor = [UIColor blackColor];
+    _tableMenu.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableMenu.separatorColor = [UIColor grayColor];
     
     
-    
-    _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
+    _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, 0);
     
     [_sourceButtom.superview addSubview:self];
     [self addSubview:_tableMenu];
@@ -235,6 +236,7 @@
     
     CGRect vFrame = [self calculateMenuViewFrameForAnimationDirection:animation];
     self.frame = vFrame;
+    //_tableMenu.frame = vFrame;
     
     _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
     [UIView commitAnimations];
@@ -250,8 +252,8 @@
     
     CGRect vFrame = self.frame;
     self.frame = CGRectMake(vFrame.origin.x, vFrame.origin.y, vFrame.size.width, 0);
-    
-    _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
+    _tableMenu.frame = CGRectMake(0, 0, vFrame.size.width, 0);
+    //_tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
     [UIView commitAnimations];
     
     
@@ -315,6 +317,11 @@
 
 
 #pragma mark - Table View DataSource Methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kSACellHeight;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -339,6 +346,16 @@
     
     
     //Configure Cell ....
+    cell.textLabel.font = [UIFont systemFontOfSize:10];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+    cell.backgroundColor = [UIColor blackColor];
+    
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:5.0];
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
+    
+    
     
     MenuItemData *itemData = (MenuItemData *)[_menuDataSource objectAtIndex:indexPath.row];
     
@@ -346,7 +363,7 @@
         cell.textLabel.text = itemData.itemName;
     
     if(itemData.itemImage != nil)
-        cell.imageView.image = itemData.itemImage;
+        cell.imageView.image = kSAImageFromBundle(itemData.itemImage);
     
     if(itemData.itemNameSubtitle != nil)
         cell.detailTextLabel.text = itemData.itemNameSubtitle;
