@@ -81,6 +81,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        _rowHeight = 0.0;
 
     }
     return self;
@@ -211,7 +212,7 @@
     _tableMenu = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _sourceButtom.frame.size.width, 0)];
     _tableMenu.dataSource = self;
     _tableMenu.delegate = self;
-    _tableMenu.backgroundColor = [UIColor blackColor];
+    _tableMenu.backgroundColor = [UIColor clearColor];
     _tableMenu.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableMenu.separatorColor = [UIColor grayColor];
     
@@ -236,8 +237,7 @@
     
     CGRect vFrame = [self calculateMenuViewFrameForAnimationDirection:animation];
     self.frame = vFrame;
-    //_tableMenu.frame = vFrame;
-    
+
     _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
     [UIView commitAnimations];
     
@@ -253,7 +253,6 @@
     CGRect vFrame = self.frame;
     self.frame = CGRectMake(vFrame.origin.x, vFrame.origin.y, vFrame.size.width, 0);
     _tableMenu.frame = CGRectMake(0, 0, vFrame.size.width, 0);
-    //_tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
     [UIView commitAnimations];
     
     
@@ -319,7 +318,7 @@
 #pragma mark - Table View DataSource Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kSACellHeight;
+    return (_rowHeight > 0.0) ? _rowHeight : kSACellHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -341,7 +340,7 @@
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     
@@ -349,7 +348,7 @@
     cell.textLabel.font = [UIFont systemFontOfSize:10];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    cell.backgroundColor = [UIColor blackColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     cell.detailTextLabel.font = [UIFont systemFontOfSize:5.0];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];

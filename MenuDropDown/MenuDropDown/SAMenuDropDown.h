@@ -29,6 +29,8 @@ typedef enum {
 {
    
 }
+@property (nonatomic, assign) CGFloat rowHeight;
+
 
 /*
  Delegate
