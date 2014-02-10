@@ -12,7 +12,7 @@
 #define kSAImageFromBundle(imgName)                   [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath]\
                                                                stringByAppendingPathComponent:imgName]]
 
-#define kSACellHeight                                25.0
+#define kSACellHeight                                40.0
 
 
 @interface MenuItemData : NSObject
@@ -345,12 +345,12 @@
     
     
     //Configure Cell ....
-    cell.textLabel.font = [UIFont systemFontOfSize:10];
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.textAlignment = NSTextAlignmentLeft;
     cell.backgroundColor = [UIColor clearColor];
     
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:5.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:12.0];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
     cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
     

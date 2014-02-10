@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSJ-yf-T3C">
-                                <rect key="frame" x="102" y="246" width="136" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSJ-yf-T3C">
+                                <rect key="frame" x="47" y="183" width="227" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.49803921569999998" green="0.88235294119999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
@@ -30,6 +30,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JSJ-yf-T3C" firstAttribute="top" secondItem="dze-qB-TOT" secondAttribute="bottom" constant="163" id="7ru-Qp-neB"/>
+                            <constraint firstItem="JSJ-yf-T3C" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Ymr-ep-skH"/>
+                            <constraint firstItem="bkV-a7-OJ3" firstAttribute="top" secondItem="JSJ-yf-T3C" secondAttribute="bottom" constant="348" id="aos-7C-iAl"/>
+                            <constraint firstItem="JSJ-yf-T3C" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="47" id="khr-Cc-KZw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="btnSender" destination="JSJ-yf-T3C" id="Cih-SQ-2R4"/>
