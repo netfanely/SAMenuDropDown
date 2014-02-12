@@ -31,7 +31,10 @@
     NSArray *arrImg = [[NSArray alloc] initWithObjects:@"10.png", @"11.png", @"12.png", @"13.png", @"14.png", @"15.png", @"16.png", @"17.png", @"18.png", @"19.png",nil] ;
 
     
-    _menuDrop = [[SAMenuDropDown alloc] initWithWithSource:_btnSender menuHeight:160.0 itemNames:arrname itemImagesName:arrImg itemSubtitles:arrTitle];
+    //_menuDrop = [[SAMenuDropDown alloc] initWithWithSource:_btnSender menuHeight:300.0 itemNames:arrname itemImagesName:arrImg itemSubtitles:arrTitle];
+    
+    _menuDrop = [[SAMenuDropDown alloc] initWithSource:_btnSender itemNames:arrname itemImagesName:arrImg itemSubtitles:arrTitle];
+
     _menuDrop.delegate = self;
     
 }

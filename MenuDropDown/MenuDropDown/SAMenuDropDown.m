@@ -97,6 +97,29 @@
 */
 
 /* Override init */
+//Base Init
+- (id)initWithSource:(UIButton *)sender menuHeight:(CGFloat)height itemName:(NSArray *)nameArray
+{
+    self = [self initWithFrame:CGRectMake(sender.frame.origin.x, sender.frame.origin.y+sender.frame.size.height, sender.frame.size.width, 0)];
+    
+    if(self) {
+        //Custom init
+        _animationDirection = kSAMenuDropAnimationDirectionBottom;
+        _sourceButtom = sender;
+        _menuHeight = height;
+        
+        [self setUpItemDataSourceWithNames:nameArray subtitles:nil imageNames:nil];
+        
+        
+        [self uiSetUp];
+    }
+    
+    return self;
+}
+
+
+
+
 - (id)initWithWithSource:(UIButton *)sender menuHeight:(CGFloat)height itemNames:(NSArray *)nameArray  itemImagesName:(NSArray *)imageArray itemSubtitles:(NSArray *)subtitleArray
 {
     self = [self initWithSource:sender menuHeight:height itemName:nameArray];
@@ -111,24 +134,32 @@
 }
 
 
-- (id)initWithSource:(UIButton *)sender menuHeight:(CGFloat)height itemName:(NSArray *)nameArray
+
+
+
+- (id)initWithSource:(UIButton *)sender itemNames:(NSArray *)nameArray itemImagesName:(NSArray *)imageArray itemSubtitles:(NSArray *)subtitleArray
 {
-    self = [self initWithFrame:CGRectMake(sender.frame.origin.x, sender.frame.origin.y+sender.frame.size.height, sender.frame.size.width, 0)];
     
-    if(self) {
+    self = [self initWithWithSource:sender menuHeight:(kSACellHeight*nameArray.count)
+                          itemNames:nameArray itemImagesName:imageArray itemSubtitles:subtitleArray];
+    if (self) {
         //Custom init
-        _animationDirection = kSAMenuDropAnimationDirectionBottom;
-        _sourceButtom = sender;
-        _menuHeight = height;
         
-        [self setUpItemDataSourceWithNames:nameArray subtitles:nil imageNames:nil];
-        
-        
-         [self uiSetUp];
     }
     
     return self;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

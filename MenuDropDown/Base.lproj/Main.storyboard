@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JSJ-yf-T3C">
-                                <rect key="frame" x="47" y="183" width="227" height="37"/>
+                                <rect key="frame" x="47" y="85" width="227" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.49803921569999998" green="0.88235294119999996" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
@@ -31,9 +31,9 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="JSJ-yf-T3C" firstAttribute="top" secondItem="dze-qB-TOT" secondAttribute="bottom" constant="163" id="7ru-Qp-neB"/>
+                            <constraint firstItem="JSJ-yf-T3C" firstAttribute="top" secondItem="dze-qB-TOT" secondAttribute="bottom" constant="65" id="7ru-Qp-neB"/>
                             <constraint firstItem="JSJ-yf-T3C" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Ymr-ep-skH"/>
-                            <constraint firstItem="bkV-a7-OJ3" firstAttribute="top" secondItem="JSJ-yf-T3C" secondAttribute="bottom" constant="348" id="aos-7C-iAl"/>
+                            <constraint firstItem="bkV-a7-OJ3" firstAttribute="top" secondItem="JSJ-yf-T3C" secondAttribute="bottom" constant="446" id="aos-7C-iAl"/>
                             <constraint firstItem="JSJ-yf-T3C" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="47" id="khr-Cc-KZw"/>
                         </constraints>
                     </view>
