@@ -42,6 +42,10 @@
 @interface SAMenuDropDown () 
 
 
+@property (nonatomic, assign) BOOL isMenuExpanded;
+
+
+
 /* TableView */
 @property (nonatomic, strong) UITableView *tableMenu;
 
@@ -60,12 +64,17 @@
 
 
 
+//Completion block
+@property (nonatomic, copy) void (^completionBlock)(SAMenuDropDown *menu, NSInteger index);
+
 
 
 /* calculate frame for Menu */
 - (CGRect)calculateMenuViewFrameForAnimationDirection:(SAMenuDropAnimationDirection)animation;
 
 @end
+
+
 
 
 @implementation SAMenuDropDown
@@ -107,7 +116,7 @@
         _animationDirection = kSAMenuDropAnimationDirectionBottom;
         _sourceButtom = sender;
         _menuHeight = height;
-        
+        _isMenuExpanded = NO;
         [self setUpItemDataSourceWithNames:nameArray subtitles:nil imageNames:nil];
         
         
@@ -263,28 +272,47 @@
 #pragma mark - Show and Hide SAMenuDrop
 - (void)showSADropDownMenuWithAnimation:(SAMenuDropAnimationDirection)animation
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    
-    CGRect vFrame = [self calculateMenuViewFrameForAnimationDirection:animation];
-    self.frame = vFrame;
+    if (_isMenuExpanded) {
+        [self hideSADropDownMenu];
+        return;
+    }
 
-    _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
-    [UIView commitAnimations];
+
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         //Animate
+                         CGRect vFrame = [self calculateMenuViewFrameForAnimationDirection:animation];
+                         self.frame = vFrame;
+
+                         _tableMenu.frame = CGRectMake(0, 0, _sourceButtom.frame.size.width, _menuHeight);
+
+                     } completion:^(BOOL finished) {
+                         //Finished
+                         [_tableMenu reloadData];
+
+                         _isMenuExpanded = YES;
+                     }];
+
     
-    [_tableMenu reloadData];
 }
 
 
 - (void)hideSADropDownMenu
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    
-    CGRect vFrame = self.frame;
-    self.frame = CGRectMake(vFrame.origin.x, vFrame.origin.y, vFrame.size.width, 0);
-    _tableMenu.frame = CGRectMake(0, 0, vFrame.size.width, 0);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         //Animate
+                         CGRect vFrame = self.frame;
+                         self.frame = CGRectMake(vFrame.origin.x, vFrame.origin.y, vFrame.size.width, 0);
+                         _tableMenu.frame = CGRectMake(0, 0, vFrame.size.width, 0);
+
+                     } completion:^(BOOL finished) {
+                         //Finished
+                       //  [_tableMenu reloadData];
+
+                         _isMenuExpanded = NO;
+                         
+                     }];
     
     
 
@@ -371,7 +399,7 @@
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
     
     
@@ -410,13 +438,37 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    //Call Delegate
     if([_delegate respondsToSelector:@selector(saDropMenu:didClickedAtIndex:)]) {
         [_delegate saDropMenu:self didClickedAtIndex:indexPath.row];
     }
-    
+
+    //Call Block if any
+    if (_completionBlock) {
+        _completionBlock(self, indexPath.row);
+    }
+
+
+
+    //Hide Menu
+    [self hideSADropDownMenu];
+
+
+    //Set New title to Button
+    MenuItemData *item = _menuDataSource[indexPath.row];
+    NSString *rowTitle = item.itemName;
+    [self.sourceButtom setTitle:rowTitle forState:UIControlStateNormal];
+
+
+
 }
 
+
+
+
+- (void)menuItemSelectedBlock:(void (^)(SAMenuDropDown *, NSInteger))completion {
+    _completionBlock = completion;
+}
 @end
 
 

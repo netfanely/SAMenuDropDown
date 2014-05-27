@@ -65,6 +65,12 @@ typedef enum {
 - (void)showSADropDownMenuWithAnimation:(SAMenuDropAnimationDirection)animation;
 - (void)hideSADropDownMenu;
 
+
+
+//Call back Blocks
+- (void)menuItemSelectedBlock:(void (^)(SAMenuDropDown *menu, NSInteger index))completion;
+
+
 @end
 
 

@@ -49,16 +49,24 @@
 
 - (IBAction)btnShowMenu:(UIButton *)sender {
     
-    if(!sender.selected) {
-        [_menuDrop showSADropDownMenuWithAnimation:kSAMenuDropAnimationDirectionBottom];
-        sender.selected = YES;
-    }
-    else {
-        [_menuDrop hideSADropDownMenu];
-        sender.selected = NO;
-    }
-    
-    
+//    if(!sender.selected) {
+//        [_menuDrop showSADropDownMenuWithAnimation:kSAMenuDropAnimationDirectionBottom];
+//        sender.selected = YES;
+//    }
+//    else {
+//        [_menuDrop hideSADropDownMenu];
+//        sender.selected = NO;
+//    }
+//    
+
+    [_menuDrop showSADropDownMenuWithAnimation:kSAMenuDropAnimationDirectionBottom];
+
+
+
+    [_menuDrop menuItemSelectedBlock:^(SAMenuDropDown *menu, NSInteger index) {
+
+        NSLog(@"\n<<Block: Item = %i>>", index);
+    }];
 }
 
 
@@ -66,9 +74,10 @@
 
 - (void)saDropMenu:(SAMenuDropDown *)menuSender didClickedAtIndex:(NSInteger)buttonIndex
 {
+
     NSLog(@"\n\n##<<%@>>##", menuSender);
     
-    NSLog(@"\n\n\nClicked \n\n<<Button#%i>>", buttonIndex);
+    NSLog(@"\n\n\nClicked \n\n<<Index#%i>>", buttonIndex);
 }
 
 
