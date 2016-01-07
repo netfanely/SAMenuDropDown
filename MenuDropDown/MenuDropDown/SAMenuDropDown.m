@@ -2,7 +2,7 @@
 //  SAMenuDropDown.m
 //  MenuDropDown
 //
-//  Created by Bidhan Baruah on 30/10/13.
+//  Created by Satish K Azad on 30/10/13.
 //  Copyright (c) 2013 SADropDown. All rights reserved.
 //
 
